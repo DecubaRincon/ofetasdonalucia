@@ -222,6 +222,39 @@ body {
         margin: 5px 0;
     }
 }
+/* Estilo CSS para un botón compacto */
+.contenedor-boton {
+  text-align: center; /* Centra el botón horizontalmente */
+}
+
+.boton-compartir {
+  background-color: #af7c64; /* Color de fondo del botón */
+  border: none;
+  color: white;
+  padding: 5px 10px; /* Relleno más pequeño para un botón más compacto */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Tamaño de fuente más pequeño */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px; /* Bordes redondeados */
+}
+.boton-compartir:hover {
+  background-color: #8a5a44;;
+}
+
+/* Media query para centrar el botón verticalmente solo en pantallas grandes */
+@media (min-width: 768px) {
+  .contenedor-boton {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+}
+
 
 
 </style>
@@ -425,12 +458,33 @@ body {
     </ul>
 </div>
 
+  <!-- HTML para el botón de compartir -->
+  <div class="contenedor-boton">
+    <button class="boton-compartir" onclick="compartirPagina()">Compartir Ofertas</button>
+  </div>
   
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+function compartirPagina() {
+  // Aquí puedes agregar la lógica para compartir la página
+  // Por ejemplo, usando la Web Share API si está disponible
+  if (navigator.share) {
+    navigator.share({
+      title: 'Título de la página',
+      url: window.location.href
+    }).then(() => {
+      console.log('¡Página compartida con éxito!');
+    })
+    .catch(console.error);
+  } else {
+    // Fallback para navegadores que no soportan la Web Share API
+    alert('Tu navegador no soporta la función de compartir.');
+  }
+}
+
 // Función para mostrar un modal específico por id
 function showModal(idModal) {
   var modal = document.getElementById(idModal);
